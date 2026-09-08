@@ -5,8 +5,6 @@ Kelompok 5 ex-1mphn3n.
 
 Program membaca ekspresi logika proposisional, menyusun tabel kebenarannya,
 menggolongkan ekspresi tersebut, dan memeriksa apakah sebuah argumen valid.
-Proyek dikerjakan sampai Pertemuan 4 pada Program Studi Ilmu Komputer,
-Universitas Bina Bangsa Getsempena.
 
 ## Program yang dibutuhkan
 
