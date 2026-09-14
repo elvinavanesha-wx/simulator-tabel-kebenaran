@@ -136,10 +136,11 @@ disajikan, bukan cara hasil dihitung.
 | --- | --- |
 | Ketua Kelompok | Reva Sahira |
 | Koordinator Teknis | Fachrul Razi Al Bahri |
-| Koordinator Pengujian | M. Farhan |
-| Koordinator Dokumentasi | Embun Ikhwana |
-| Koordinator Presentasi | Najwa Salmi |
 | Anggota Tim Teknis | Ulfi Ufrijal |
+| Koordinator Dokumentasi | Embun Ikhwana |
+| Koordinator Presentasi | Adrian Maulana |
+| Koordinator Pengujian | Najwa Salmi |
+| Anggota Tim Pengujian | M. Farhan |
 
 ## Git/code notice
 
