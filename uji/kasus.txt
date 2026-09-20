@@ -1,0 +1,91 @@
+# Kasus uji tabel kebenaran, dihitung dengan tangan.
+#
+# Berkas ini diisi Koordinator Pengujian tanpa menjalankan program. Nilainya
+# dihitung memakai aturan logika proposisional dari bahan kuliah, lalu
+# dibandingkan dengan keluaran program memakai:
+#
+#     python uji/jalankan_uji.py
+#
+# Apabila keduanya berbeda, salah satu di antaranya keliru, dan selisih itu
+# wajib ditelusuri sebelum pekerjaan dilanjutkan.
+#
+# Bentuk penulisan:
+#     tabel  <ekspresi>  <kolom akhir>  <golongan>
+#         Kolom akhir ditulis berurutan mulai dari baris pertama, yaitu baris
+#         yang seluruh variabelnya benar. Untuk dua variabel urutannya
+#         TT, TF, FT, FF.
+#     argumen  <premis> ; <premis> ; ... |- <konklusi>  <valid|tidakvalid>
+#     galat  <ekspresi>
+#         Masukan yang harus ditolak program.
+
+# --------------------------------------------------- ekspresi satu variabel
+tabel  p               TF      kontingensi
+tabel  ~p              FT      kontingensi
+tabel  p | ~p          TT      tautologi
+tabel  p & ~p          FF      kontradiksi
+tabel  p -> p          TT      tautologi
+
+# --------------------------------------------------- ekspresi dua variabel
+# Contoh yang dipakai sepanjang dokumen milestone.
+tabel  (p -> q) & ~q   FFFT    kontingensi
+tabel  p & q           TFFF    kontingensi
+tabel  p | q           TTTF    kontingensi
+tabel  p -> q          TFTT    kontingensi
+tabel  p <-> q         TFFT    kontingensi
+tabel  p xor q         FTTF    kontingensi
+
+# Hukum De Morgan: kedua sisi setara, jadi biimplikasinya tautologi.
+tabel  ~(p & q) <-> (~p | ~q)    TTTT    tautologi
+tabel  ~(p | q) <-> (~p & ~q)    TTTT    tautologi
+
+# Kontraposisi setara dengan implikasi aslinya.
+tabel  (p -> q) <-> (~q -> ~p)   TTTT    tautologi
+
+# Implikasi tidak berlaku dua arah; kebalikannya tidak setara.
+tabel  (p -> q) <-> (q -> p)     TFFT    kontingensi
+
+# --------------------------------------------------- ekspresi tiga variabel
+# Delapan baris, urutan TTT, TTF, TFT, TFF, FTT, FTF, FFT, FFF.
+tabel  p & q & r                 TFFFFFFF    kontingensi
+tabel  p | q | r                 TTTTTTTF    kontingensi
+# Baris keenam (p=F, q=T, r=F) mudah keliru: p → q bernilai benar karena
+# premisnya salah, tetapi q → r bernilai salah, sehingga konjungsinya salah.
+tabel  (p -> q) & (q -> r)       TFFFTFTT    kontingensi
+
+# Keutamaan operator: konjungsi lebih kuat daripada disjungsi.
+tabel  p | q & r                 TTTTTFFF    kontingensi
+
+# Silogisme hipotetis, bentuk implikasi gabungannya tautologi.
+tabel  ((p -> q) & (q -> r)) -> (p -> r)   TTTTTTTT    tautologi
+
+# --------------------------------------------------- argumen valid
+# Modus tollens, contoh pada Bagian 2 dokumen milestone.
+argumen  p -> q ; ~q |- ~p                 valid
+# Modus ponens.
+argumen  p -> q ; p |- q                   valid
+# Silogisme hipotetis.
+argumen  p -> q ; q -> r |- p -> r         valid
+# Silogisme disjungtif.
+argumen  p | q ; ~p |- q                   valid
+# Konjungsi premis.
+argumen  p ; q |- p & q                    valid
+
+# --------------------------------------------------- argumen tidak valid
+# Menganggap implikasi berlaku dua arah, contoh pada Bagian 2.
+argumen  p -> q ; q |- p                   tidakvalid
+# Menyangkal premis, lalu menyimpulkan penyangkalan konklusi.
+argumen  p -> q ; ~p |- ~q                 tidakvalid
+# Disjungsi tidak menentukan bagian mana yang benar.
+argumen  p | q |- p                        tidakvalid
+
+# --------------------------------------------------- masukan yang harus ditolak
+galat  (p -> q
+galat  p -> q)
+galat  p & & q
+galat  p q
+galat  p ->
+galat  ~
+galat  p ^ q
+galat  p & 3
+galat
+galat  ()
